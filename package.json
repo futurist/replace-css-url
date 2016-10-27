@@ -1,13 +1,14 @@
 {
   "name": "replace-css-url",
-  "version": "1.0.2",
-  "description": "Replace all url() and @import paths within css text, with custom function map.",
+  "version": "1.0.3",
+  "description": "Replace all url paths and @import paths within css text, with custom function map.",
   "main": "dist/replace-css-url.cjs.js",
   "scripts": {
     "build": "rollup -c",
-    "make": "gulp bump && npm run make",
+    "make": "gulp bump && npm run build",
     "pretest": "npm run build",
-    "test": "mocha"
+    "test": "mocha",
+    "prepublish": "npm test"
   },
   "repository": {
     "type": "git",
@@ -16,7 +17,9 @@
   "keywords": [
     "css",
     "replace",
-    "url"
+    "url",
+    "import",
+    "path"
   ],
   "author": "James Yang <jamesyang999@gmail.com>",
   "license": "MIT",

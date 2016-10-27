@@ -10,11 +10,12 @@ export default function replacePathInCSS (css, mapFunc) {
   return [
       /(@import\s+)(')(.+?)'/gi,
       /(@import\s+)(")(.+?)"/gi,
-      /(url\s*\()(\s*)([^'"].+?\))/gi,
+      /(url\s*\()\s*()([^\s'"].+?\))/gi,
       /(url\s*\()\s*(')(.+?)'/gi,
       /(url\s*\()\s*(")(.+?)"/gi,
   ].reduce((css, reg) =>   {
     return css.replace(reg, (all, lead, quote, path) => {
+      quote = quote || ''
       return lead + quote + mapFunc(path) + quote
     })
   }, css)

@@ -21,7 +21,8 @@ export default {
 
 function minify (minifyMap) {
   return {
-    transformBundle: (code, option) => {
+    name: 'minify',
+    transformBundle (code, option) {
       Object.keys(minifyMap).forEach(format => {
         if (option.format == format) {
           const name = minifyMap[format]
