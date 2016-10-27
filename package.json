@@ -1,8 +1,9 @@
 {
   "name": "replace-css-url",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Replace all url() and @import paths within css text, with custom function map.",
-  "main": "dist/replace-css-url.js",
+  "main": "dist/replace-css-url.cjs.js",
+  "readme": "README.md",
   "scripts": {
     "build": "rollup -c",
     "make": "gulp bump && npm run make",
