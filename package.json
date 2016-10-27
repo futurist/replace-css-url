@@ -4,6 +4,9 @@
   "description": "Replace all url() and @import paths within css text, with custom function map.",
   "main": "dist/replace-css-url.js",
   "scripts": {
+    "build": "rollup -c",
+    "make": "gulp bump && npm run make",
+    "pretest": "npm run build",
     "test": "mocha"
   },
   "repository": {
@@ -22,6 +25,8 @@
   },
   "homepage": "https://github.com/futurist/replace-css-url#readme",
   "devDependencies": {
+    "chai": "^3.5.0",
+    "gulp-bump": "^2.4.0",
     "rollup-plugin-buble": "^0.14.0",
     "uglify-js": "^2.7.4"
   }

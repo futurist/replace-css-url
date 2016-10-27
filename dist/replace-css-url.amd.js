@@ -8,8 +8,7 @@ define(function () { 'use strict';
  * @link https://github.com/futurist/replace-css-url
  */
 
-function replacePathInCSS (css, mapUrl) {
-  base = base || '';
+function replacePathInCSS (css, mapFunc) {
   return [
       /(@import\s+)(')(.+?)'/gi,
       /(@import\s+)(")(.+?)"/gi,
@@ -17,8 +16,8 @@ function replacePathInCSS (css, mapUrl) {
       /(url\s*\()\s*(')(.+?)'/gi,
       /(url\s*\()\s*(")(.+?)"/gi,
   ].reduce(function (css, reg) {
-    return css.replace(reg, function (all, lead, quote, uri) {
-      return lead + quote + mapUrl(uri) + quote
+    return css.replace(reg, function (all, lead, quote, path) {
+      return lead + quote + mapFunc(path) + quote
     })
   }, css)
 }

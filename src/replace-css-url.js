@@ -6,17 +6,16 @@
  * @link https://github.com/futurist/replace-css-url
  */
 
-export default function replacePathInCSS (css, mapUrl) {
-  base = base || ''
+export default function replacePathInCSS (css, mapFunc) {
   return [
       /(@import\s+)(')(.+?)'/gi,
       /(@import\s+)(")(.+?)"/gi,
       /(url\s*\()(\s*)([^'"].+?\))/gi,
       /(url\s*\()\s*(')(.+?)'/gi,
       /(url\s*\()\s*(")(.+?)"/gi,
-  ].reduce(function (css, reg) {
-    return css.replace(reg, function (all, lead, quote, uri) {
-      return lead + quote + mapUrl(uri) + quote
+  ].reduce((css, reg) =>   {
+    return css.replace(reg, (all, lead, quote, path) => {
+      return lead + quote + mapFunc(path) + quote
     })
   }, css)
 }

@@ -12,10 +12,10 @@ export default {
     minify({iife: 'dist/replace-css-url.min.js'})
   ],
   targets: [
-    { format: 'iife', dest: 'dist/replace-css-url.iife.js' },
-    { format: 'amd',  dest: 'dist/replace-css-url.amd.js'  },
+    { format: 'es',   dest: 'dist/replace-css-url.es.js'   },
     { format: 'cjs',  dest: 'dist/replace-css-url.cjs.js'  },
-    { format: 'es',   dest: 'dist/replace-css-url.es.js'   }
+    { format: 'amd',  dest: 'dist/replace-css-url.amd.js'  },
+    { format: 'iife', dest: 'dist/replace-css-url.iife.js' },
   ]
 }
 
