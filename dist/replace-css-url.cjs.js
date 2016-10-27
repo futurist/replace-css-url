@@ -1,5 +1,12 @@
 'use strict';
 
+/**
+ * @fileOverview Replace all url() and @import paths within css text, with custom function map.
+ * @name replace-css-url.js
+ * @author James Yang <jamesyang999@gmail.com>
+ * @license MIT
+ * @link https://github.com/futurist/replace-css-url
+ */
 
 function replacePathInCSS (css, mapFunc) {
   return [
