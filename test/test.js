@@ -1,5 +1,5 @@
 var expect = require('chai').expect
-var lib = require('../dist/replace-css-url.cjs.js')
+var lib = require('../')
 
 describe('test', function() {
   it('@import and url', function() {
