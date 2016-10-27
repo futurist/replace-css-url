@@ -4,10 +4,6 @@ machine:
   node:
     version: 6
 
-dependencies:
-  override:
-    - npm install
-
 test:
   override:
     - ./node_modules/.bin/mocha
