@@ -1,0 +1,28 @@
+{
+  "name": "replace-css-url",
+  "version": "1.0.0",
+  "description": "Replace all url() and @import paths within css text, with custom function map.",
+  "main": "dist/replace-css-url.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/futurist/replace-css-url.git"
+  },
+  "keywords": [
+    "css",
+    "replace",
+    "url"
+  ],
+  "author": "James Yang <jamesyang999@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/futurist/replace-css-url/issues"
+  },
+  "homepage": "https://github.com/futurist/replace-css-url#readme",
+  "devDependencies": {
+    "rollup-plugin-buble": "^0.14.0",
+    "uglify-js": "^2.7.4"
+  }
+}
