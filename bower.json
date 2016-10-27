@@ -1,0 +1,22 @@
+{
+  "name": "replace-css-url",
+  "description": "Replace all url() and @import paths within css text, with custom function map.",
+  "main": "dist/replace-css-url.js",
+  "authors": [
+    "James Yang <jamesyang999@gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "css",
+    "replace",
+    "url"
+  ],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
