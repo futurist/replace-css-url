@@ -2,22 +2,14 @@
 
 Independent lib to replace all url() and @import paths within css text, with custom function map.
 
-This lib will try to keep the original css style format(quote with single, double, or none), or even worked when there's have syntax error.
+This lib will try to keep the original css style format(quote with single, double, or none), or even worked when there's syntax error.
 
 [![CircleCI](https://circleci.com/gh/futurist/replace-css-url.svg?style=svg)](https://circleci.com/gh/futurist/replace-css-url)
 
 ## Install
 
-- npm
-
 ``` bash
 npm install replace-css-url
-```
-
-- bower
-
-``` bash
-bower install replace-css-url
 ```
 
 ## Usage
@@ -31,12 +23,24 @@ const css = `
 p { background: url('c.png') }
 `
 
-// below will add each path with myhost URL
-console.log( replace_css_url(css, path => 'http://myhost/' + path) )
+// prefix each path with 'http://myhost/'
+console.log( replace_css_url(
+  css,
+  function(path){
+    return 'http://myhost/' + path
+  }
+) )
 
+// result css
+`@import "http://myhost/a.css"
+@import url(http://myhost/b.css)
+p { background: url('http://myhost/c.png') }
+`
 ```
 
-If you want css-in-js solution, check this lib: [cssobj](https://github.com/cssobj/cssobj)
+This lib should be used in node, as a preprocessor of css, althrough it's should worked in browser too.
+
+If you want dynamicaly change url in browser, check this lib: [cssobj](https://github.com/cssobj/cssobj)
 
 ## API
 
@@ -44,7 +48,7 @@ If you want css-in-js solution, check this lib: [cssobj](https://github.com/csso
 
 - **css** *[string]*
 
-the css string want to be altered.
+The css string want to be altered.
 
 - **mapFunc** *[function]*, signature: `function(path){return newPath}`
 
