@@ -1,6 +1,6 @@
 # replace-css-url
 
-Independent lib to replace all url() and @import paths within css text, with custom function map.
+Independent lib to replace all `url()` and `@import` paths within css text, with custom function map.
 
 This lib will try to keep the original css style format(quote with single, double, or none), or even worked when there's syntax error.
 
@@ -19,7 +19,7 @@ const replace_css_url = require('replace-css-url')
 
 const css = `
 @import "a.css"
-@import url(b.css)
+@import url( b.css )
 p { background: url('c.png') }
 `
 
@@ -33,12 +33,12 @@ console.log( replace_css_url(
 
 // result css
 `@import "http://myhost/a.css"
-@import url(http://myhost/b.css)
+@import url( http://myhost/b.css )
 p { background: url('http://myhost/c.png') }
 `
 ```
 
-This lib should be used in node, as a preprocessor of css, althrough it's should worked in browser too.
+This lib should be used in node, as a preprocessor of css.
 
 If you want dynamicaly change url in browser, check this lib: [cssobj](https://github.com/cssobj/cssobj)
 
@@ -52,7 +52,7 @@ The css string want to be altered.
 
 - **mapFunc** *[function]*, signature: `function(path){return newPath}`
 
-A function that accept path for each appearance, both in `@import` or inside `url()`.
+A function that accept path for each appearance, both in `@import` or inside `url( )`.
 
 Return the new path that wanted.
 
@@ -60,6 +60,10 @@ Return the new path that wanted.
 
 The altered css with new paths.
 
+
+## Gotcha
+
+This lib don't match any empty `url( )` or `''` `""`
 
 ## LICENSE
 

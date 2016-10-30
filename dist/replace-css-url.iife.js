@@ -11,15 +11,14 @@ var replace_css_url = (function () {
 
 function replacePathInCSS (css, mapFunc) {
   return [
-      /(@import\s+)(')(.+?)'/gi,
-      /(@import\s+)(")(.+?)"/gi,
-      /(url\s*\()\s*()([^\s'"].+?\))/gi,
-      /(url\s*\()\s*(')(.+?)'/gi,
-      /(url\s*\()\s*(")(.+?)"/gi,
-  ].reduce(function (css, reg) {
-    return css.replace(reg, function (all, lead, quote, path) {
-      quote = quote || '';
-      return lead + quote + mapFunc(path) + quote
+      /(@import\s+)(')(.+?)(')/gi,
+      /(@import\s+)(")(.+?)(")/gi,
+      /(url\s*\()(\s*)([^\s'")].*?)(\))/gi,
+      /(url\s*\()(\s*')([^']+?)(')/gi,
+      /(url\s*\()(\s*")([^"]+?)(")/gi,
+  ].reduce(function (css, reg, index) {
+    return css.replace(reg, function (all, lead, quote1, path, quote2) {
+      return lead + quote1 + mapFunc(path) + quote2
     })
   }, css)
 }
