@@ -13,9 +13,9 @@ function replacePathInCSS (css, mapFunc) {
   return [
       /(@import\s+)(')(.+?)(')/gi,
       /(@import\s+)(")(.+?)(")/gi,
-      /(url\s*\()(\s*)([^\s'")].*?)(\s*\))/gi,
       /(url\s*\()(\s*')([^']+?)(')/gi,
-      /(url\s*\()(\s*")([^"]+?)(")/gi ].reduce(function (css, reg, index) {
+      /(url\s*\()(\s*")([^"]+?)(")/gi,
+      /(url\s*\()(\s*)([^\s'")].*?)(\s*\))/gi ].reduce(function (css, reg, index) {
     return css.replace(reg, function (all, lead, quote1, path, quote2) {
       var ret = mapFunc(path, quote1);
       if(hasQuote.test(ret) && hasQuote.test(quote1)) { quote1=quote2=''; }

@@ -69,8 +69,17 @@ expect(lib(css, path=>'"'+path+'"')).equal(`
 @import url( '' ) print;
 @import url( "" ) print;
 @import url("d" ) print;
-@import url("b" ) projection, tv;
+@import url( "b" ) projection, tv;
 p {background: url("c.png")}
 `)
+
+    const css2 = `
+a {background: url(c.png)}
+`
+
+    expect(lib(css2, path=>'"' + '/asdf/' + path + '"')).equal(`
+a {background: url("/asdf/c.png")}
+`)
+
   })
 })
