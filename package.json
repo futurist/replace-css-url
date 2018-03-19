@@ -1,6 +1,6 @@
 {
   "name": "replace-css-url",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Replace all url paths and @import paths within css text, with custom function map.",
   "main": "dist/replace-css-url.cjs.js",
   "scripts": {
@@ -30,6 +30,7 @@
     "chai": "^3.5.0",
     "gulp-bump": "^2.4.0",
     "mocha": "^3.1.2",
+    "rollup": "~0.57.1",
     "rollup-plugin-buble": "^0.14.0",
     "rollup-plugin-minify": "^1.0.2",
     "uglify-js": "^2.7.4"
