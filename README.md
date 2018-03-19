@@ -60,6 +60,8 @@ Return the new path that wanted.
 
 The altered css with new paths.
 
+If the `return_value` start with `'` or `"`, then you can replace/add the quote instead of original one, see [#1](https://github.com/futurist/replace-css-url/issues/3)
+
 
 ## Gotcha
 

@@ -53,4 +53,24 @@ p {background: url() url('') url('') url("") url(   "+++c.png")}
 `)
 
   })
+
+  it('should work with custom quote', function() {
+    const css = `
+@import url( ) projection, tv;
+@import url( '' ) print;
+@import url( "" ) print;
+@import url( 'd' ) print;
+@import url( b ) projection, tv;
+p {background: url(   "c.png")}
+`
+
+expect(lib(css, path=>'"'+path+'"')).equal(`
+@import url( ) projection, tv;
+@import url( '' ) print;
+@import url( "" ) print;
+@import url("d" ) print;
+@import url("b" ) projection, tv;
+p {background: url("c.png")}
+`)
+  })
 })
