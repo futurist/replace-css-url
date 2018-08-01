@@ -1,6 +1,6 @@
 {
   "name": "replace-css-url",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Replace all url paths and @import paths within css text, with custom function map.",
   "main": "dist/replace-css-url.cjs.js",
   "bin": "bin/index.js",
