@@ -49,6 +49,7 @@ globList.forEach(function (globPattern) {
         var newCSS = replaceCSSUrl(
             oldCSS,
             function(url){ return replaceFunc(fileName, url) })
+        if(oldCSS === newCSS) return
         flags.backup && fs.writeFileSync(fileName+'.bak', oldCSS, 'utf8')
         fs.writeFileSync(fileName, newCSS, 'utf8')
         console.log('** replaced css url:', fileName)
