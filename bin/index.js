@@ -60,7 +60,7 @@ globList.forEach(function (globPattern) {
       }
     })
     .on('error', function (e) { console.error(e) })
-    .on('end', function () { if (--pending === 0) console.log('** Totally replaced css url:', total) })
+    .on('end', function () { if (--pending === 0) console.log('** Totally replaced files:', total) })
 })
 
 process.on('unhandledRejection', function (e) { console.error('Uncaught (in promise) ' + e.stack) })
