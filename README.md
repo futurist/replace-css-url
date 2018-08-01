@@ -8,11 +8,41 @@ This lib will try to keep the original css style format(quote with single, doubl
 
 ## Install
 
+
+#### As CLI:
+
+``` bash
+npm install -g replace-css-url
+```
+
+#### As javascript module:
+
 ``` bash
 npm install replace-css-url
 ```
 
+
 ## Usage
+
+#### As CLI:
+
+```
+  Usage
+  $ replace-css-url [globs] options...
+  Options
+  --version           Show version info
+  --help              Show help info
+  --exec, -e          [REQUIRED] Execute function to replace for every css file with "(fileName, url)=>newCSS"
+  --ignore, -i        Ignore blobs for file paths
+  --backup, -b        Create backup for each replace
+
+  globs default to '**/*.css'
+
+  Examples
+  $ replace-css-url './assets/**/*.css' './static/**/*.css' --exec '(file,url)=>url'
+```
+
+#### As javascript module:
 
 ``` javascript
 const replace_css_url = require('replace-css-url')

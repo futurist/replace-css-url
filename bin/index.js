@@ -9,11 +9,11 @@ const pkg = require('../package.json')
 const defaultGlob = '**/*.css'
 const cli = require('meow')(`
 Usage
-$ ${pkg.name} [globs] [options...]
+$ ${pkg.name} [globs] options...
 Options
 --version           Show version info
 --help              Show help info
---exec, -e          Execute function to replace for every css file with "(fileName, url)=>newCSS"
+--exec, -e          [REQUIRED] Execute function to replace for every css file with "(fileName, url)=>newCSS"
 --ignore, -i        Ignore blobs for file paths
 --backup, -b        Create backup for each replace
 
@@ -36,8 +36,8 @@ var ignore = ['**/node_modules/**'].concat(flags.ignore || [])
 
 var replaceFunc = evalExpression(flags.exec)
 if(typeof replaceFunc!='function') {
-    console.log(pkg.name + ' --exec must be function')
-    process.exit(1)
+    console.log('\nError: ' + pkg.name + ': --exec must be function')
+    cli.showHelp(1)
 }
 
 var pending = globList.length
@@ -60,7 +60,7 @@ globList.forEach(function (globPattern) {
       }
     })
     .on('error', function (e) { console.error(e) })
-    .on('end', function () { if (--pending === 0) console.log('** total replaced css url:', total) })
+    .on('end', function () { if (--pending === 0) console.log('** totally replaced css url:', total) })
 })
 
 process.on('unhandledRejection', function (e) { console.error('Uncaught (in promise) ' + e.stack) })
