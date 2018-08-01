@@ -5,28 +5,38 @@ var replaceCSSUrl = require('../dist/replace-css-url.cjs.js')
 var fs = require('fs')
 var glob = require('glob')
 
-function parseArgs (argv) {
-  argv = ['--match'].concat(argv.slice(2))
-  var args = {}
-  var name
-  argv.forEach(function (arg) {
-    if (/^--/.test(arg)) {
-      name = arg.substr(2)
-      args[name] = args[name] || []
-    } else {
-      args[name].push( name=='exec' ? evalExpression(arg) : arg)
-    }
-  })
-  return args
-}
+const pkg = require('../package.json')
+const defaultGlob = '**/*.css'
+const cli = require('meow')(`
+Usage
+$ ${pkg.name} [globs] [options...]
+Options
+--version           Show version info
+--help              Show help info
+--exec, -e          Execute function to replace for every css file with "(fileName, url)=>newCSS"
+--ignore, -i        Ignore blobs for file paths
+--backup, -b        Create backup for each replace
 
-var args = parseArgs(process.argv)
-var globList = args.match && args.match.length ? args.match : ['**/*.css']
-var ignore = ['**/node_modules/**'].concat(args.ignore || [])
+globs default to '${defaultGlob}'
 
-var replaceFunc = (args.exec||[])[0]
+Examples
+$ ${pkg.name} './assets/**/*.css' './static/**/*.css' --exec '(file,url)=>url'
+`, {
+  flags:{
+    backup: {alias: 'b', type: 'boolean'},
+    exec: {alias: 'e'},
+    ignore: {alias: 'i'},
+  }
+})
+
+let {flags, input} = cli
+
+var globList = input && input.length ? input : [defaultGlob]
+var ignore = ['**/node_modules/**'].concat(flags.ignore || [])
+
+var replaceFunc = evalExpression(flags.exec)
 if(typeof replaceFunc!='function') {
-    console.log('[replace-css-url] --exec must be function')
+    console.log(pkg.name + ' --exec must be function')
     process.exit(1)
 }
 
@@ -34,12 +44,17 @@ var pending = globList.length
 globList.forEach(function (globPattern) {
   glob(globPattern, {ignore: ignore})
     .on('match', function (fileName) {
+      try{
         var oldCSS = fs.readFileSync(fileName, 'utf8')
         var newCSS = replaceCSSUrl(
-            oldCSS, 
+            oldCSS,
             function(url){ return replaceFunc(fileName, url) })
-        args.backup && fs.writeFileSync(fileName+'.bak', oldCSS, 'utf8')
+        flags.backup && fs.writeFileSync(fileName+'.bak', oldCSS, 'utf8')
         fs.writeFileSync(fileName, newCSS, 'utf8')
+        console.log('** replaced:', fileName)
+      }catch(e){
+        console.log(fileName, e)
+      }
     })
     .on('error', function (e) { console.error(e) })
     .on('end', function () { if (--pending === 0) console.log('done') })
