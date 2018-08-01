@@ -41,6 +41,7 @@ if(typeof replaceFunc!='function') {
 }
 
 var pending = globList.length
+var total = 0
 globList.forEach(function (globPattern) {
   glob(globPattern, {ignore: ignore})
     .on('match', function (fileName) {
@@ -53,12 +54,13 @@ globList.forEach(function (globPattern) {
         flags.backup && fs.writeFileSync(fileName+'.bak', oldCSS, 'utf8')
         fs.writeFileSync(fileName, newCSS, 'utf8')
         console.log('** replaced css url:', fileName)
+        total++
       }catch(e){
         console.log(fileName, e)
       }
     })
     .on('error', function (e) { console.error(e) })
-    .on('end', function () { if (--pending === 0) console.log('done') })
+    .on('end', function () { if (--pending === 0) console.log('** total replaced css url:', total) })
 })
 
 process.on('unhandledRejection', function (e) { console.error('Uncaught (in promise) ' + e.stack) })
