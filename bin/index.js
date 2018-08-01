@@ -51,7 +51,7 @@ globList.forEach(function (globPattern) {
             function(url){ return replaceFunc(fileName, url) })
         flags.backup && fs.writeFileSync(fileName+'.bak', oldCSS, 'utf8')
         fs.writeFileSync(fileName, newCSS, 'utf8')
-        console.log('** replaced:', fileName)
+        console.log('** replaced css url:', fileName)
       }catch(e){
         console.log(fileName, e)
       }
