@@ -32,14 +32,14 @@ npm install replace-css-url
   Options
   --version           Show version info
   --help              Show help info
-  --exec, -e          [REQUIRED] Execute function to replace for every css file with "(fileName, url)=>newCSS"
+  --exec, -e          [REQUIRED] Execute function to replace for every css file with "(url, fileName)=>newCSS"
   --ignore, -i        Ignore blobs for file paths
   --backup, -b        Create backup for each replace
 
   globs default to '**/*.css'
 
   Examples
-  $ replace-css-url './assets/**/*.css' './static/**/*.css' --exec '(file,url)=>url'
+  $ replace-css-url './assets/**/*.css' './static/**/*.css' --exec '(url, file)=>url'
 ```
 
 #### As javascript module:
